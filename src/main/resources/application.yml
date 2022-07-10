@@ -1,0 +1,37 @@
+server:
+  #set port number to 0 to have the port number automatically set to random port which
+  #is useful when multiple instances of the service are launched
+  port: 0
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8010/eureka
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  application:
+    name: photo-ms
+  devtools:
+    restart:
+      enabled: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/photo?useSSL=false&serverTimezone=UTC
+    username: kwd-admin
+    password: ${MYSQL_PASS}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+        storage_engine: innodb
+        format_sql: true
+        generate_statistics: false
