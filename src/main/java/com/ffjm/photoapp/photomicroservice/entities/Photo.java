@@ -34,6 +34,6 @@ public class Photo implements Serializable {
     private String publicId;
 
     @Column(nullable = false)
-    private long userId;
+    private String userId;
 
 }
