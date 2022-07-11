@@ -36,7 +36,10 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public List<PhotoDto> getUsersPhoto(String userId) throws ResourceNotFoundException {
-        List<Photo> photoList = photoRepository.findByUserId(userId).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
+        List<Photo> photoList = photoRepository.findByUserId(userId);
+        if(photoList == null || photoList.isEmpty()){
+            throw new ResourceNotFoundException("No Resource Found");
+        }
         Type listType = new TypeToken<List<PhotoDto>>(){}.getType();
         return modelMapper.map(photoList, listType);
     }

@@ -28,7 +28,7 @@ public class PhotoController {
         this.photoService = photoService;
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<PhotoResponseModel> savePhoto(@Valid @RequestBody PhotoRequestModel photoRequestModel) {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
@@ -42,6 +42,7 @@ public class PhotoController {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         Type listType = new TypeToken<List<PhotoDto>>() {
         }.getType();
-        return ResponseEntity.ok(modelMapper.map(photoService.getUsersPhoto(userId), listType));
+        List<PhotoDto> photoDtoList = photoService.getUsersPhoto(userId);
+        return ResponseEntity.ok().body(modelMapper.map(photoDtoList, listType));
     }
 }
